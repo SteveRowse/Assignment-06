@@ -71,7 +71,7 @@ class FileProcessor:
         """
         file = None
         try:
-            file = open(FILE_NAME, "w")
+            file = open(file_name, "w")
             json.dump(student_data, file, indent=2)
             print("The following data was saved to file!")
             for student in student_data:
@@ -148,10 +148,10 @@ class IO:
             if not student_last_name.isalpha():
                 raise ValueError("The last name should not contain numbers.")
             course_name = input("Please enter the name of the course: ")
-            student_data = {"FirstName": student_first_name,
+            new_student_data = {"FirstName": student_first_name,
                             "LastName": student_last_name,
                             "CourseName": course_name}
-            students.append(student_data)
+            student_data.append(new_student_data)
             print(f"You have registered {student_first_name} {student_last_name} for {course_name}.")
         except ValueError as e:
             IO.output_error_messages
@@ -195,9 +195,8 @@ while (True):
 
     # Input user data
     if menu_choice == "1":  # This will not work if it is an integer!
-        students = IO.input_student_data(student_data=students)
+        IO.input_student_data(student_data=students)
         continue
-
 
     # Present the current data
     elif menu_choice == "2":
