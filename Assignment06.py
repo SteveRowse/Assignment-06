@@ -50,12 +50,10 @@ class FileProcessor:
         try:
             file = open(file_name, "r")
             student_data = json.load(file)
+        except  FileNotFoundError as e:
+            IO.output_error_messages(message= "file not found - File will be created on save.")
         except Exception as e:
-            print("Error: There was a problem with reading the file.")
-            print("Please check that the file exists and that it is in a json format.")
-            print("-- Technical Error Message -- ")
-            print(e.__doc__)
-            print(e.__str__())
+            IO.output_error_messages(message="Error: There was a problem with reading the file.", error=e)
         finally:
             # Check if a file object exists and is still open
             if file is not None and file.closed == False:
@@ -97,7 +95,7 @@ class IO:
     SRowse,3.4.26,Added a function to display the data
     SRowse,3.4.26,Added a function to display custom error messages
     """
-    @staticmethod
+    @staticmethod # print menu
     def printMenu(menu: str):
         """
         A function that prints the menu option
@@ -108,7 +106,7 @@ class IO:
     # Present the menu of choices
         print(menu)
 
-    @staticmethod
+    @staticmethod #print menu options
     def input_menu_choice():
         """
         A function that prints the menu option
@@ -119,7 +117,7 @@ class IO:
         menuchoice = input("What would you like to do? ")
         return menuchoice
 
-    @staticmethod
+    @staticmethod # a general error handeling for repeated code
     def output_error_messages(message: str, error: Exception = None):
         """
         A function that outputs an error message
