@@ -127,10 +127,11 @@ class IO:
         SRowse,3.4.26,Created Class
         output: error message
         """
-        print(e)  # Prints the custom message
-        print("-- Technical Error Message -- ")
-        print(e.__doc__)
-        print(e.__str__())
+        print(message)
+        if error is not None:
+            print("-- Technical Error Message -- ")
+            print(error.__doc__)
+            print(error.__str__())
 
     @staticmethod #chioce1
     def input_student_data(student_data: list):
@@ -154,9 +155,9 @@ class IO:
             student_data.append(new_student_data)
             print(f"You have registered {student_first_name} {student_last_name} for {course_name}.")
         except ValueError as e:
-            IO.output_error_messages
+            IO.output_error_messages(message="The names entered may only contain letters.")
         except Exception as e:
-            IO.output_error_messages
+            IO.output_error_messages(message="There was a problem with the entered data")
         return student_data
 
     @staticmethod # choice2
